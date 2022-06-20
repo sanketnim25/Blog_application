@@ -1,3 +1,4 @@
+drop database SNS;
 create database SNS;
 use SNS;
 CREATE TABLE USER_DATA (
@@ -18,7 +19,6 @@ CREATE TABLE POST_DATA (
     CONTENT varchar(5000),
     POST_TIME datetime,
     primary key (POST_ID),
-    primary key (VERSION_ID),
     foreign key (USER_ID) references USER_DATA(USER_ID)
 );
 CREATE TABLE COMMENT_DATA (
@@ -27,7 +27,7 @@ CREATE TABLE COMMENT_DATA (
     COMMENT_ID int,
     CONTENT varchar(500),
     COMMENT_TIME datetime,
-    primary key (COMMENT_ID)
-    foreign key (USER_ID) references USER_DATA(USER_ID)
+    primary key (COMMENT_ID),
+    foreign key (USER_ID) references USER_DATA(USER_ID),
     foreign key (POST_ID) references POST_DATA(POST_ID)
 );

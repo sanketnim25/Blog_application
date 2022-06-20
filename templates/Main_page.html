@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    {% if username %}
+    <h1>Hello {{username}}, Welcome to Social Networking Site</h1>
+    <a href="logout">logout here </a>
+    <br />
+    <br />
+    <a href="my_profile">View My Profile </a>
+
+    {% else %}
+    <h1>Welcome to Circle</h1>
+    <a href="login">Login here </a>
+    <br />
+    <a href="new_login">New User Login here </a>
+    {% endif %}
+
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Here are some of our latest top blog posts</h1>
+        <p>All information might not be available, sorry for inconvinience</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          {% for item in records %} {% for user in records_login_info %} {% if
+          user[0]==item[0] %}
+          <h3><a href="show_profile.html"> {{user[1]}} </a></h3>
+          <p>date{{item[1]}}</p>
+          <p>likes{{item[1]}}</p>
+          <p>{{item[3]}}</p>
+          {% endif %} {% endfor %} {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
