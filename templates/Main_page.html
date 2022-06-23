@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bootstrap Example</title>
+    <title>Social Networking Site</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     {% if username %}
-    <h1>Hello {{username}}, Welcome to Social Networking Site</h1>
+    <h1>Hello {{username}}, Welcome to Social Networking Site_1</h1>
     <a href="logout">logout here </a>
     <br />
     <br />
@@ -15,9 +15,13 @@
 
     {% else %}
     <h1>Welcome to Social Networking Site</h1>
-    <a href="login">Login here </a>
+    <a href="usercode/login">Login here </a>
     <br />
-    <a href="new_login">New User Login here </a>
+    <br />
+    <br />
+    <br />
+    <br />
+    <a href="usercode/register">register here if you are new </a>
     {% endif %}
 
     <div class="container">
