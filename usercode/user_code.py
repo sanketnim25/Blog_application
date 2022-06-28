@@ -43,11 +43,6 @@ def add_user_to_database(username,email,mobile_number,introduction,password):
     except Error as e:
         print(e)
 
-@user_code.route('/logout')
-def logout():
-    session.pop('username',None)
-    return redirect(url_for("home_page"))
-
 @user_code.route('/register',methods=["GET","POST"])
 def register():
     if request.method=="GET":
@@ -124,10 +119,11 @@ def update_profile():
                     cursor.execute(f"""UPDATE user_data 
                                         set name='{username}', email='{email}',Mobile_number='{mobile_number}',password='{introduction}',password='{introduction}'
                                         where user_id='{user_info[0][4]}';""")
-
-        email=request.form['Email']
-        mobile_number=request.form['mobile_number']
-        introduction=request.form['introduction']
-        password=request.form['psw']
-        add_user_to_database(username,email,mobile_number,introduction,password)
+        except Error as e:
+            print(e)
         return redirect(url_for("home_page"))
+
+@user_code.route('/logout')
+def logout():
+    session.pop('username',None)
+    return redirect(url_for("home_page"))
