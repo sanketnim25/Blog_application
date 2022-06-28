@@ -1,46 +1,49 @@
 <form action="update_profile" method="POST">
-  <div class="container">
-    <h3><a href="show_profile.html"> {{user[1]}} </a></h3>
+
+  <h3>Current User information:</h3>
+  <br />username:      {{user_info[0][1]}}
+  <br />email:         {{user_info[0][2]}}
+  <br />mobile_number: {{user_info[0][3]}}
+  <br />password:      {{user_info[0][4]}}
+  <br />introduction:  {{user_info[0][5]}}
+
+  <fieldset>
+    <center> <legend><b><h3>Enter New information:</h3></b></legend> </center>
     <br />
     <br />
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required />
+    <center><label for="uname"><b>Username</b></label></center>
+    <center><input type="text" placeholder="Enter Username" name="uname" required /></center>
     <br />
     <br />
-    <label for="Email"><b>Username</b></label>
-    <input type="text" placeholder="Enter Email id" name="Email" required />
+    <center><label for="Email"><b>Username</b></label></center>
+    <center><input type="text" placeholder="Enter Email id" name="Email" required /></center>
     <br />
     <br />
-    <label for="mobile_number"><b>Mobile Number</b></label>
-    <input
+    <center><label for="mobile_number"><b>Mobile Number</b></label></center>
+    <center><input
       type="text"
       placeholder="Enter Mobile Number"
       name="mobile_number"
-      required
+      required </center>
     />
     <br />
     <br />
-    <label for="introduction"><b>Introduction</b></label>
-    <input
+    <center><label for="introduction"><b>Introduction</b></label></center>
+    <center><input
       type="text"
       placeholder="about yourself"
       name="introduction"
-      required
+      required  </center>
     />
     <br />
     <br />
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required />
+    <center><label for="psw"><b>Password</b></label></center>
+    <center><input type="password" placeholder="Enter Password" name="psw" required /></center>
     <br />
     <br />
 
-    <button type="submit">Login</button>
-  </div>
+    </center><button type="submit">Login</button></center>
+</fieldset>
   <br />
   <br />
-
-  <div class="container" style="background-color: #f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
 </form>
