@@ -3,18 +3,16 @@ import datetime
 import mysql.connector
 import json
 import sys
-sys.path.insert(0,'E:\github\Social_network\postcode')
 import random
 import sql_queries
-from post_code import POST_test
 
-user_code = Blueprint ("user_code",__name__,static_folder="static",template_folder="templates")
+post_code = Blueprint ("post_code",__name__,static_folder="static",template_folder="templates")
 
+def POST_test(numberr):
+    return(numberr**numberr)
 
-
-@user_code.route('/login',methods=["GET","POST"])
+@post_code.route('/login',methods=["GET","POST"])
 def login():
-    
     if request.method=="GET":
         return render_template("login.html")
     if request.method=="POST":
@@ -25,9 +23,16 @@ def login():
             if password==matching_profile[0][4]:
                 session['username']=matching_profile[0][1]
                 return redirect(url_for("home_page"))
+            else:
+                return render_template("login.html")
+            #temperary arrangement, to work even if multiple users found with same name
+        elif password==matching_profile[0][4]:
+            session['username']=matching_profile[0][1]
+            return redirect(url_for("home_page"))
         else:
             return render_template("login.html")
-
+            # since login function is in usercode, url_for is no longer working, find a solution for it.
+            #return redirect(url_for("login"))
 def check_for_existing_users_with_same_name(username):
     try:
         with mysql.connector.connect(host="localhost",user="root",password="sanket@123",database="SNS") as connection:
@@ -37,13 +42,6 @@ def check_for_existing_users_with_same_name(username):
     except Error as e:
         print(e)
     return(result)
-
-@user_code.route('/view_profile',methods=["GET","POST"])
-def view_profile():
-    if request.method=="GET":
-        return render_template("view_profile.html")
-    if request.method=="POST":
-        POST_test(2)
 
 def add_user_to_database(username,email,mobile_number,introduction,password):
     user_id=str(random.randint(0,10000))
@@ -56,7 +54,7 @@ def add_user_to_database(username,email,mobile_number,introduction,password):
     except Error as e:
         print(e)
 
-@user_code.route('/register',methods=["GET","POST"])
+@post_code.route('/register',methods=["GET","POST"])
 def register():
     if request.method=="GET":
         return render_template("register.html")
@@ -71,7 +69,7 @@ def register():
         user_info=check_for_existing_users_with_same_name(username)
         return render_template("login.html",user_info=user_info)
 
-@user_code.route('/delete_profile',methods=["GET","POST"])
+@post_code.route('/delete_profile',methods=["GET","POST"])
 def delete_profile():
     if request.method=="GET":
         return render_template("delete_profile.html")
@@ -100,7 +98,7 @@ def delete_user_from_database(username,password):
     except Error as e:
             print(e)
 
-@user_code.route('/update_profile',methods=["GET","POST"])
+@post_code.route('/update_profile',methods=["GET","POST"])
 def update_profile():
 
     username=session['username']
@@ -141,7 +139,7 @@ def update_profile():
         user_info=check_for_existing_users_with_same_name(username)
         return redirect(url_for("home_page"))
 
-@user_code.route('/logout')
+@post_code.route('/logout')
 def logout():
     session.pop('username',None)
     return redirect(url_for("home_page"))
